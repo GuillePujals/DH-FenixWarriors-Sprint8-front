@@ -15,7 +15,7 @@ class Properties extends Component {
         // console.log(props);
         if (props) {
             this.setState({properties: props.properties})
-            console.log(this.state.properties);
+            //console.log(this.state.properties);
         }
 
     }
