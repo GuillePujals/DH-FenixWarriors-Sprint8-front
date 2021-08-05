@@ -15,13 +15,13 @@ class GenresInDb extends Component{
     //Compomentes Ciclo de vida - Montar - Actualizar - Desmontar
     //Montaje 
     componentDidMount(){
-        fetch('http://localhost:3002/api/category')
+        fetch('http://localhost:3002/api/category/count')
         .then(respuesta =>{
             return respuesta.json()
         })
         .then(categories =>{
-            //console.log(categories.categories)
-            this.setState({genresList: categories.categories})
+            //console.log(categories)
+            this.setState({genresList: categories})
         })
         .catch(error => console.log(error))
 
@@ -46,12 +46,12 @@ class GenresInDb extends Component{
                         <div className="card-body fondoCaja">
                             <div  className="row">
                                 {
-                                    //console.log(this.state.genresList)
+                                   // console.log(this.state.genresList)
                             
                                     this.state.genresList.map((genre,index)=>{
                                         return  <Genre  {...genre}  key={index} />
                                     })
-                                    
+                               
                                 }
                             </div>
                         </div>
