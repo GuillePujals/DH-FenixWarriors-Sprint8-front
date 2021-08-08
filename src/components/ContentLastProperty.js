@@ -5,8 +5,8 @@ import Images from './Images';
 function ContentLastProperty(){
     const [lastProperty, setLastProperty] = useState({});
     useEffect(()=>{
-        if(lastProperty.image && lastProperty.image.length > 0){
-        console.log(lastProperty)};
+        if(lastProperty.destination){
+        console.log(lastProperty.destination.destination)};
     },[lastProperty])
     useEffect(()=>{
         console.log('Se montó el componente');
@@ -25,7 +25,7 @@ function ContentLastProperty(){
                 property.json()
                 )
             .then(data =>{
-                console.log(data.data.image);
+                console.log(data.data.destination.destination);
                 setLastProperty(data.data)
                 
             })
@@ -58,7 +58,8 @@ function ContentLastProperty(){
                             </div>
                             <div>
                                 <div>
-                                    {/*<p>{lastProperty.destination.destination}</p>*/
+                                { (lastProperty && lastProperty.destination)?
+                                    <p>{lastProperty.destination.destination}</p> : ""}
                                     <p>{lastProperty.description}</p>
                                 </div>
                                 <div>
