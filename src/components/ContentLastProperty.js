@@ -1,27 +1,40 @@
 import React from 'react';
-import imagenFondo from '../assets/images/mandalorian.jpg';
 import {useState, useEffect} from 'react';
+import Images from './Images';
  
 function ContentLastProperty(){
-    const [lastProperty, setLastProperty] = useState([]);
+    const [lastProperty, setLastProperty] = useState({});
+    useEffect(()=>{
+        if(lastProperty.image && lastProperty.image.length > 0){
+        console.log(lastProperty)};
+    },[lastProperty])
     useEffect(()=>{
         console.log('Se montó el componente');
         fetch('http://localhost:3002/api/properties')
             .then(response => response.json())
             .then(data =>{
-                //console.log(data.properties[data.properties.length-1].id);
-                let propertyId = data.properties[data.properties.length-1].id
-                let url = 'http://localhost:3002/api/properties/'+ propertyId
-                //console.log('http://localhost:3002/api/properties/'+ propertyId);
-                fetch(url)
-            })
-            .then(response => response.json())
+             
+                //let propertyId = data.properties[data.properties.length-1].id;
+                let url = 'http://localhost:3002/api/properties/'+ data.properties[data.properties.length-1].id;
+                return url
+                //fetch('http://localhost:3002/api/properties/' + data.properties[data.properties.length-1].id)
+                
+    })
+            .then(url => fetch(url))
+            .then(property => 
+                property.json()
+                )
             .then(data =>{
-                console.log(data);
-                //setLastProperty(data.properties[data.properties.length-1])
+                console.log(data.data.image);
+                setLastProperty(data.data)
+                
             })
-            .catch(error => console.error(error));
+            .catch(error => console.log(error));
     },[])
+    
+
+    //console.log(lastProperty.image);
+    
     return(
         <React.Fragment>
             
@@ -36,17 +49,23 @@ function ContentLastProperty(){
 						<div className="card-body">
 							<div className="text-center">
                                 <div>
-                                    {lastProperty.length === 0 && <p>Cargando</p>}
+                                    {/*<img class="img-fluid px-3 px-sm-4 mt-3 mb-4" src="http://localhost:3002/img/products/img-1626975982281.jpg" alt="Star Wars - Mandalorian" style = {{width: 40 +'rem'}} />*/}
+                                    {(lastProperty.image && lastProperty.image.length > 0)?
+                                    lastProperty.image.map ((image,i) => {
+                                     return <Images {...image } key={i} />
+                                     }):  <p>Cargando</p>}
                                 </div>
-                               {//lastProperty.images.map((image,i) => {
-                                   //return(
-                               
-								<img className="img-fluid px-3 px-sm-4 mt-3 mb-4" style={{width: 40 +'rem'}}  src={imagenFondo} alt=" Star Wars - Mandalorian "/>
-                                //)})
-                                }
                             </div>
-                            <p>{lastProperty.description}</p>
-                            <a className="btn btn-danger" target="_blank" rel="nofollow" href="/">View movie detail</a>
+                            <div>
+                                <div>
+                                    {<p>{lastProperty.destination.destination}</p>}
+                                    <p>{lastProperty.description}</p>
+                                </div>
+                                <div>
+                                    <p>${ new Intl.NumberFormat('de-DE', { style: 'decimal' }).format(lastProperty.price)}</p>
+                                    <a className="btn btn-danger" target="_blank" rel="nofollow" href="/">View property detail</a>
+                                </div>
+                            </div>
                         </div>
 					</div>
 				</div>
