@@ -58,7 +58,7 @@ function ContentLastProperty(){
                             </div>
                             <div>
                                 <div>
-                                    {<p>{lastProperty.destination.destination}</p>}
+                                    {/*<p>{lastProperty.destination.destination}</p>*/
                                     <p>{lastProperty.description}</p>
                                 </div>
                                 <div>
