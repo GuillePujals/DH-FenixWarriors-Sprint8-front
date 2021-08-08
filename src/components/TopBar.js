@@ -7,9 +7,10 @@ function TopBar(){
         <React.Fragment>
 				{/*<!-- Topbar -->*/}
 				
-				<nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-				
-				<a className="sidebar-brand d-flex align-items-center justify-content-center" href="/" style = {{width: 40 +'%'}}>
+				{/*<nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow" style = {{marginBottom: 0 +'px'}}>*/}
+				<nav className="navbar navbar-expand navbar-light bg-white topbar static-top shadow" style = {{marginBottom: 5 +'px'}}>
+
+				<a className="sidebar-brand d-flex align-items-center justify-content-center" href="/" style = {{width: 25 +'%'}}>
                     
             
 				<div className="sidebar-brand-icon">
